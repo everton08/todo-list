@@ -8,14 +8,17 @@
   var ENTER_KEY = 13;
   var DATAS = [
     {
+			id: 12000001,
       task: "Teste 01",
       done: false
     },
     {
+			id: 12000002,
       task: "Teste 02",
       done: false
     },
     {
+			id: 12000003,
       task: "Teste 03",
       done: false
     }
@@ -39,14 +42,20 @@
     $twoway.innerHTML = $input.value;
     var value = e.target.value;
     if(e.keyCode === ENTER_KEY){
-      DATAS.push({task: value, done: false});
+      DATAS.push({id: new Date().getTime() ,task: value, done: false});
       render();
     }
+		$.c("DATAS", DATAS);
   }
 
   function doneItem(e){
     var element = e.target;
-    console.log(element.dataset.index);
+		DATAS.forEach(function(task){
+			if(task.id == element.dataset.id){
+				(task.done) ? task.done = false : task.done = true;
+				render();
+			}
+		});
   }
 
   function deleteItem(e){
@@ -58,10 +67,13 @@
     var fragmentButton = document.createDocumentFragment();
     DATAS.forEach(function(value, index){
         var li = document.createElement('li');
-        li.dataset.index = index;
+        li.dataset.id = value.id;
         var button = document.createElement('button');
         button.appendChild(document.createTextNode("X"));
         li.appendChild(document.createTextNode(value.task));
+				if(value.done){
+					li.setAttribute("class", "done");
+				}
         fragmentButton.appendChild(button);
         li.appendChild(fragmentButton);
         fragmentLi.appendChild(li);
