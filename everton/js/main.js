@@ -45,7 +45,6 @@
       DATAS.push({id: new Date().getTime() ,task: value, done: false});
       render();
     }
-		$.c("DATAS", DATAS);
   }
 
   function doneItem(e){
@@ -59,7 +58,11 @@
   }
 
   function deleteItem(e){
-    // pegar o dataset do pai
+		var li = e.target.parentElement;
+		DATAS = DATAS.filter(function(task){
+			return task.id != li.dataset.id;
+		});
+		render();
   }
 
   function render(){
