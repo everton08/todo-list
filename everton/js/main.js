@@ -43,11 +43,12 @@
 		$.delegate($list, 'li', 'click', function(e){
 			DATAS.forEach(function(value){
 				if(value.task === e.target.firstChild.data){
-					$.toggleClass(e.target, "done");
 					(value.done) ? value.done = false : value.done = true;
+					render();
 				}
 			});
 		});
+
 	}
 
 	function deleteItem(){
@@ -68,6 +69,9 @@
 				var button = document.createElement('button');
 				button.appendChild(document.createTextNode("X"));
 	      li.appendChild(document.createTextNode(value.task));
+				if(value.done){
+					 li.setAttribute("class", "done");
+				}
 				fragmentButton.appendChild(button);
 				li.appendChild(fragmentButton);
         fragmentLi.appendChild(li);
