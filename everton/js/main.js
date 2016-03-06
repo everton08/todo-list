@@ -3,12 +3,11 @@
 
   var $input = $('#add');
   var $list = $('#list');
-  var $itens;
   var $twoway = $('#twoway');
   var ENTER_KEY = 13;
   var DATAS = [
     {
-			id: 12000001,
+		  id: 12000001,
       task: "Teste 01",
       done: false
     },
