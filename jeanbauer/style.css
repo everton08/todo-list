@@ -1,0 +1,96 @@
+h1{
+  font-size:40px;
+  background-image: linear-gradient(to left, rgb(210, 199, 122), rgb(113, 206, 133));
+  padding: 20px;
+  text-transform: uppercase;
+      font-family: monospace;
+}
+
+body {
+    opacity: 1;
+    background-image: linear-gradient(to left, rgb(218, 210, 153), rgb(176, 218, 185));
+    height: 100%;
+    color: #262626;
+    font-family: 'Helvetica Neue Light', 'Open Sans', Helvetica;
+    font-size: 14px;
+    font-weight: 300;
+    padding: 1px;
+}
+
+input{
+  width: 40%;
+  height: 40px;
+}
+
+.span{
+  display: block;
+  margin: 20px;
+  background: #FFF;
+  width: 50%;
+  margin-left: auto;
+  border-radius: 20px;
+  margin-right: auto;
+  font-size: 20px;
+  font-weight: bold;
+  opacity: 0.2;
+}
+
+li{
+  font-size: 19px;
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  list-style: none;
+}
+
+button{
+  cursor: pointer;
+  margin-left: 10px;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 10px;
+}
+button:hover{
+  background-color: #c0392b;
+}
+.strike{
+   text-decoration: line-through;
+}
+
+.middle{
+  text-align: center;
+}
+
+.filter{
+  margin-top:20px;
+}
+.filter button{
+  border-radius: 2px;
+}
+
+footer{
+  width: 100%;
+  height: 60px;
+  background: #FFF;
+  opacity: 0.4;
+  bottom: 0;
+  position: fixed;
+  margin-left: -10px;
+  text-align: center;
+}
+
+footer button{
+  background: url(http://findicons.com/files/icons/2534/aroma/24/undo.png) no-repeat;
+  background-color: #ecf0f1;
+  background-position: 17%;
+  font-weight: bold;
+  border: 1px solid #c9c9c9;
+  margin-top: 10px;
+  width: 19%;
+  height: 39px;
+  color: black;
+}
+footer button:hover{
+  background-color: #ecf0f1;
+}
