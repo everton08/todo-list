@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ToDo</title>
+    <link href="style.css" rel="stylesheet"/>
+  </head>
+  <body>
+    <h1>Check your console, dude!</h1>
+    <div class="middle">
+      <input type="text" id="add"></input>
+      <span class="span" id="mirrorSpan"></span>
+
+      <ul id="list">
+      </ul>
+      <div class="filter">
+        <button id="comTask">Completed tasks</button>
+        <button id="uncTask">Uncompleted tasks</button>
+        <button id="allTask">All</button>
+      </div>
+    </div>
+    <footer>
+      <button id="undo">Undo last action</button>
+    </footer>
+    <script src="helper.js"></script>
+    <script src="stores.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>
