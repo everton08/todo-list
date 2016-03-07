@@ -82,7 +82,7 @@
       var value = e.target.value;
       if(e.keyCode === ENTER_KEY){
         Insert(value);
-        render();
+        render(datas);
       }
 
       $mirrorSpan.innerHTML = $input.value;
