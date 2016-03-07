@@ -37,10 +37,6 @@
     render(datas);
   };
 
-  function Undo() {
-    console.log("TO DO: Undo object", UNDO[UNDO.length - 1]);
-  }
-
   function Done(obj) {
     var id = parseInt(obj.getAttribute("data-id"));
     var i = datas.length;
@@ -60,7 +56,7 @@
     var i = datas.length;
     while(i--){
       if(datas[i].id === id){
-        Undo(UNDO.push(datas.splice(i,1))); break;
+        UNDO.push(datas.splice(i,1)); break;
       }
    }
    render(datas);
@@ -92,7 +88,7 @@
 
     $.delegate($list, '#list button','click', function(e){Delete(e.target.parentNode);});
     $.delegate($list, '#list span','click', function(e){Done(e.target.parentNode);});
-
+    $.on($btnAllTask, 'click', function(){render(datas);});
     $.on($btnCompletedTask, 'click', function(e){
       var data = [];
       datas.forEach(function(e){
@@ -100,7 +96,6 @@
           data.push(e)
         }
       });
-      console.log(data);
       render(data);
     });
     $.on($btnUncompletedTask, 'click', function(e){
@@ -110,17 +105,13 @@
           data.push(e)
         }
       });
-      console.log(data);
       render(data);
     });
-    $.on($btnAllTask, 'click', function(e){
+
+    $.on($btnUndo, 'click', function(e){
+      datas.push(UNDO[UNDO.length - 1][0]);
+      UNDO.pop(UNDO.length - 1);
       render(datas);
-    });
-    $.on($btnUndo, 'click', function(e){
-      console.log('working on that =)');
-    });
-    $.on($btnUndo, 'click', function(e){
-      console.log('working on that =)');
     });
   };
 
