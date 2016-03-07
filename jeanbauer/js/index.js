@@ -8,7 +8,8 @@
       $btnCompletedTask = $('#comTask'),
       $btnUncompletedTask = $('#uncTask'),
       $btnAllTask = $('#allTask'),
-      $btnUndo = $('#undo');
+      $btnUndo = $('#undo'),
+      $footer = $('footer');
 
   var ENTER_KEY = 13;
   var UNDO = [];
@@ -70,7 +71,7 @@
 
   function Insert(task) {
     datas.push({
-      id: data[data.length - 1].id + 1,
+      id: datas[datas.length - 1].id + 1,
       task: task,
       done: false
     })
@@ -118,6 +119,9 @@
     $.on($btnUndo, 'click', function(e){
       console.log('working on that =)');
     });
+    $.on($btnUndo, 'click', function(e){
+      console.log('working on that =)');
+    });
   };
 
   function render(data) {
@@ -138,6 +142,7 @@
     $list.innerHTML = "";
     $input.value = "";
     $list.appendChild(fragment);
+    UNDO.length? $footer.style.display = "block" : $footer.style.display = "none";
   };
 
   window.addEventListener('DOMContentLoaded', App);
