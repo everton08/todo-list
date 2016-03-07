@@ -58,11 +58,11 @@
     var id = parseInt(obj.getAttribute("data-id"));
     var i = datas.length;
     while(i--){
-      if(data[i].id === id){
+      if(datas[i].id === id){
         Undo(UNDO.push(datas.splice(i,1))); break;
       }
    }
-   render();
+   render(datas);
     // Removendo do DOM
     // var elementIWannaRemove = document.querySelectorAll('[button-id="'+ obj.getAttribute("data-id") + '"]');
     // elementIWannaRemove[0].parentNode.parentNode.removeChild(elementIWannaRemove[0].parentNode);
