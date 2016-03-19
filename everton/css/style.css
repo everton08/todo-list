@@ -81,21 +81,12 @@ body{
 .default-tag{
   width: auto;
   height: auto;
-  color: #FFFFFF;
+  color: #2C001E;
   font-weight: bold;
   font-size: 12px;
   float: right;
   padding: 5px 20px;
   margin-left: 10px;
   cursor: pointer;
-}
-.tag-delete{
-  background: #D90E21;
-}
-.tag-done{
-  background: #A5CC25;
-}
-
-.tag-all{
-  background: #00BCC9;
+  border: 1px solid #77216F;
 }
