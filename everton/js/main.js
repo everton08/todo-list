@@ -5,6 +5,10 @@
   var $list = $('#list');
   var $twoway = $('#twoway');
   var $doneAll = $('#check-all');
+  var $completed = $('#completed');
+  var $uncompleted = $('#uncompleted');
+  var $all = $('#all');
+  var $clear = $('#clear');
 
   var ENTER_KEY = 13;
   var DATAS = [
@@ -27,18 +31,27 @@
 
   function app() {
     addEventListeners();
-    render();
+    render(DATAS);
   }
 
   function addEventListeners(){
     // Add
     $.on($input,'keyup', addItem);
+    
     // Done
     $.delegate($list, 'input', 'click', doneItem );
     // Done All
     $.on($doneAll, 'click', doneAll );
+    //completed
+    $.on($completed, 'click', getDone);
+    //uncompleted
+    $.on($uncompleted, 'click', getToDo);
+    //all
+    $.on($all, 'click', getAll);
     // Delete
     $.delegate($list, 'button', 'click', deleteItem);
+    //deleteDone
+    $.on($clear, 'click', deleteDone);
   }
 
   function addItem(e) {
@@ -46,14 +59,14 @@
     var value = e.target.value;
     if(e.keyCode === ENTER_KEY){
       DATAS.push({id: new Date().getTime() ,task: value, done: false});
-      render();
+      render(DATAS);
     }
   }
 
   function doneAll(e){
     DATAS.forEach(function(task){
       (task.done) ? task.done = false : task.done = true;
-      render();
+      render(DATAS);
     });
   }
 
@@ -62,7 +75,7 @@
 		DATAS.forEach(function(task){
 			if(task.id == element.dataset.id){
 				(task.done) ? task.done = false : task.done = true;
-				render();
+				render(DATAS);
 			}
 		});
   }
@@ -72,14 +85,43 @@
 		DATAS = DATAS.filter(function(task){
 			return task.id != li.dataset.id;
 		});
-		render();
+		render(DATAS);
+  }
+  function deleteDone(){
+    DATAS = DATAS.filter(function(task){
+      if(!task.done){
+        return task;
+      }
+    });
+    render(DATAS);
   }
 
-  function render(){
+  function getDone(){
+    var completed = DATAS.filter(function(task){
+      if(task.done){
+        return task;
+      }
+    });
+    render(completed);
+  }
+
+  function getToDo(){
+    var unCompleted = DATAS.filter(function(task){
+      if(!task.done){
+        return task;
+      }
+    });
+    render(unCompleted);
+  }
+  function getAll(){
+    render(DATAS);
+  }
+
+  function render(datas){
     var fragmentLi = document.createDocumentFragment();
     var fragmentButton = document.createDocumentFragment();
     var fragmentCheck = document.createDocumentFragment();
-    DATAS.forEach(function(value, index){
+    datas.forEach(function(value, index){
         var li = document.createElement('li');
         var check = document.createElement('input');
         check.type = 'checkbox';
