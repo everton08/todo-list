@@ -8,7 +8,8 @@
       $btnCompletedTask = $('#comTask'),
       $btnUncompletedTask = $('#uncTask'),
       $btnAllTask = $('#allTask'),
-      $btnUndo = $('#undo');
+      $btnUndo = $('#undo'),
+      $footer = $('footer');
 
   var ENTER_KEY = 13;
   var UNDO = [];
@@ -36,10 +37,6 @@
     render(datas);
   };
 
-  function Undo() {
-    console.log("TO DO: Undo object", UNDO[UNDO.length - 1]);
-  }
-
   function Done(obj) {
     var id = parseInt(obj.getAttribute("data-id"));
     var i = datas.length;
@@ -58,11 +55,11 @@
     var id = parseInt(obj.getAttribute("data-id"));
     var i = datas.length;
     while(i--){
-      if(data[i].id === id){
-        Undo(UNDO.push(datas.splice(i,1))); break;
+      if(datas[i].id === id){
+        UNDO.push(datas.splice(i,1)); break;
       }
    }
-   render();
+   render(datas);
     // Removendo do DOM
     // var elementIWannaRemove = document.querySelectorAll('[button-id="'+ obj.getAttribute("data-id") + '"]');
     // elementIWannaRemove[0].parentNode.parentNode.removeChild(elementIWannaRemove[0].parentNode);
@@ -70,7 +67,7 @@
 
   function Insert(task) {
     datas.push({
-      id: data[data.length - 1].id + 1,
+      id: datas[datas.length - 1].id + 1,
       task: task,
       done: false
     })
@@ -81,7 +78,7 @@
       var value = e.target.value;
       if(e.keyCode === ENTER_KEY){
         Insert(value);
-        render();
+        render(datas);
       }
 
       $mirrorSpan.innerHTML = $input.value;
@@ -91,7 +88,7 @@
 
     $.delegate($list, '#list button','click', function(e){Delete(e.target.parentNode);});
     $.delegate($list, '#list span','click', function(e){Done(e.target.parentNode);});
-
+    $.on($btnAllTask, 'click', function(){render(datas);});
     $.on($btnCompletedTask, 'click', function(e){
       var data = [];
       datas.forEach(function(e){
@@ -99,7 +96,6 @@
           data.push(e)
         }
       });
-      console.log(data);
       render(data);
     });
     $.on($btnUncompletedTask, 'click', function(e){
@@ -109,14 +105,13 @@
           data.push(e)
         }
       });
-      console.log(data);
       render(data);
     });
-    $.on($btnAllTask, 'click', function(e){
-      render(datas);
-    });
+
     $.on($btnUndo, 'click', function(e){
-      console.log('working on that =)');
+      datas.push(UNDO[UNDO.length - 1][0]);
+      UNDO.pop(UNDO.length - 1);
+      render(datas);
     });
   };
 
@@ -138,6 +133,7 @@
     $list.innerHTML = "";
     $input.value = "";
     $list.appendChild(fragment);
+    UNDO.length? $footer.style.display = "block" : $footer.style.display = "none";
   };
 
   window.addEventListener('DOMContentLoaded', App);
